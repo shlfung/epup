@@ -3,6 +3,12 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 
+from .models import Project
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the projects index.")
+    ##return HttpResponse("Hello, world. You're at the projects index.")
+    num_projects = Project.objects.all().count()
+
+    context = {'num_projects': num_projects}
+
+    return render(request, 'index.html', context=context)

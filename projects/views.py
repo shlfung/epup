@@ -12,3 +12,11 @@ def index(request):
     context = {'num_projects': num_projects}
 
     return render(request, 'index.html', context=context)
+
+from django.views import generic
+
+class ProjectListView(generic.ListView):
+    model = Project
+
+class ProjectDetailView(generic.DeleteView):
+    model = Project

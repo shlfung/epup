@@ -1,4 +1,7 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 from django.http import HttpResponse
@@ -23,5 +26,11 @@ from django.views import generic
 class ProjectDetailView(generic.DetailView):
     model = Project
 
-class ProjectListView(generic.ListView):
+class ProjectListView(LoginRequiredMixin, generic.ListView):
     model = Project
+    paginate_by = 10
+
+    def get_queryset(self):
+        return (
+            Project.objects.filter(creator=self.request.user).order_by('created_at')
+        )

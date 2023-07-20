@@ -6,10 +6,14 @@ from django.http import HttpResponse
 from .models import Project
 
 def index(request):
-    ##return HttpResponse("Hello, world. You're at the projects index.")
+
+    #Counting visit using session
+    num_visits = request.session.get('num_visits', 0)
+    request.session['num_visits'] = num_visits + 1
+
     num_projects = Project.objects.all().count()
 
-    context = {'num_projects': num_projects}
+    context = {'num_projects': num_projects, 'num_visits': num_visits}
 
     return render(request, 'index.html', context=context)
 

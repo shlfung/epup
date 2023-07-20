@@ -1,12 +1,12 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Project List</h1>
+  <h1>Projects List</h1>
   {% if project_list %}
     <ul>
       {% for project in project_list %}
       <li>
-        <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+        <a href="/projects/projects/{{ project.id }}"">{{ project.title }}</a>
         ({{project.reb_num}})
       </li>
       {% endfor %}

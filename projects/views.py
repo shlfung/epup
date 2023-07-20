@@ -15,8 +15,9 @@ def index(request):
 
 from django.views import generic
 
-class ProjectListView(generic.ListView):
+
+class ProjectDetailView(generic.DetailView):
     model = Project
 
-class ProjectDetailView(generic.DeleteView):
+class ProjectListView(generic.ListView):
     model = Project

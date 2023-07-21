@@ -2,6 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .forms import ProjectForm
 
 # Create your views here.
 from django.http import HttpResponse
@@ -16,7 +17,11 @@ def index(request):
 
     num_projects = Project.objects.all().count()
 
-    context = {'num_projects': num_projects, 'num_visits': num_visits}
+    form = ProjectForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+
+    context = {'num_projects': num_projects, 'num_visits': num_visits, 'form': form}
 
     return render(request, 'index.html', context=context)
 

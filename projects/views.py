@@ -31,6 +31,11 @@ from django.views import generic
 class ProjectDetailView(generic.DetailView):
     model = Project
 
+class ProjectCreateView(generic.CreateView):
+    model = Project
+
+    fields = ['title', 'reb_num', 'creator']
+
 class ProjectListView(LoginRequiredMixin, generic.ListView):
     model = Project
     paginate_by = 10

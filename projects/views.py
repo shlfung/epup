@@ -36,6 +36,11 @@ class ProjectCreateView(generic.CreateView):
 
     fields = ['title', 'reb_num', 'creator']
 
+class ProjectUpdateView(generic.UpdateView):
+    model = Project
+
+    fields = ['title', 'reb_num']
+
 class ProjectListView(LoginRequiredMixin, generic.ListView):
     model = Project
     paginate_by = 10

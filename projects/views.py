@@ -34,7 +34,11 @@ class ProjectDetailView(generic.DetailView):
 class ProjectCreateView(generic.CreateView):
     model = Project
 
-    fields = ['title', 'reb_num', 'creator']
+    fields = ['title', 'reb_num']
+
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        return super(ProjectCreateView, self).form_valid(form)
 
 class ProjectUpdateView(generic.UpdateView):
     model = Project

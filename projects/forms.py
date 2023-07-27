@@ -6,3 +6,4 @@ class ProjectForm(ModelForm):
     class Meta:
         model = Project
         fields = ['title', 'reb_num', 'creator']
+

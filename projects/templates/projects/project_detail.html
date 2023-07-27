@@ -1,7 +1,10 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  <h1>Title: {{ project.title }}</h1>
+
+
+  <h3>Title: {{ project.title }}</h3>
+  modify: <a href="/projects/projects/update/{{project.id}}">{{ project.title }}</a>
 
 
   <!-- author detail link not yet defined -->

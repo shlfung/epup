@@ -11,6 +11,6 @@ class Project(models.Model):
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
-        """Returns the url to access a particular book instance."""
+        """Returns the url to access a particular project instance."""
         return reverse('project-detail', args=[str(self.id)])
 

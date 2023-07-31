@@ -7,8 +7,8 @@ from django.urls import reverse
 class Project(models.Model):
     title = models.CharField(max_length=1000, verbose_name="Project Title")
     reb_num = models.CharField(max_length=1000, verbose_name="REB Number")
-    participant_expected_num = models.IntegerField(verbose_name="Expected Number of Participants")
-    expected_start_date = models.DateField(verbose_name="Expected Start Date")
+    participant_expected_num = models.IntegerField(null=True, blank=True, default=0, verbose_name="Expected Number of Participants")
+    expected_start_date = models.DateField(null=True, blank=True, default=None, verbose_name="Expected Start Date")
     created_at = models.DateTimeField(auto_now_add=True)
     creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 

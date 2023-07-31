@@ -34,7 +34,7 @@ class ProjectDetailView(generic.DetailView):
 class ProjectCreateView(generic.CreateView):
     model = Project
 
-    fields = ['title', 'reb_num']
+    fields = ['title', 'reb_num', 'participant_expected_num', 'expected_start_date']
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -43,7 +43,7 @@ class ProjectCreateView(generic.CreateView):
 class ProjectUpdateView(generic.UpdateView):
     model = Project
 
-    fields = ['title', 'reb_num']
+    fields = ['title', 'reb_num', 'participant_expected_num', 'expected_start_date']
 
 class ProjectListView(LoginRequiredMixin, generic.ListView):
     model = Project

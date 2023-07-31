@@ -5,6 +5,10 @@ from .models import Project
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field, Row
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+
 class ProjectForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProjectForm, self).__init__(*args, **kwargs)
@@ -19,8 +23,8 @@ class ProjectForm(ModelForm):
                 Field('reb_num', css_class='bg-santared mw-100'),
                 css_class='form-row',
             )
-        )
+    )
     class Meta:
         model = Project
-        fields = ['title', 'reb_num', 'creator']
+        fields = "__all__"
 

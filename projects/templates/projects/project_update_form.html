@@ -1,5 +1,5 @@
 {% extends "base_generic.html" %}
-{% load crispy_forms_tags %}
+{% load cms_tags crispy_forms_tags %}
 
 {% block content %}
   <h2>Update {{ project.title }}</h2>
@@ -9,7 +9,7 @@
   <p>
     <form action="" method="post">
       {% csrf_token %}
-      {{ form|crispy }}
+      {% crispy form %}
       <input type="submit" value="Update" />
     </form>
   </p>

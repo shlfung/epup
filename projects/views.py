@@ -35,6 +35,7 @@ class ProjectCreateView(generic.CreateView):
     model = Project
 
     fields = ['title', 'reb_num', 'participant_expected_num', 'expected_start_date']
+    form = ProjectForm()
 
     def form_valid(self, form):
         form.instance.creator = self.request.user

@@ -1,6 +1,6 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProjectForm
 
@@ -25,6 +25,20 @@ def index(request):
 
     return render(request, 'index.html', context=context)
 
+def create(request):
+
+    form = ProjectForm(request.POST or None)
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            return redirect ('index')
+    context = {
+        "form":form
+    }
+
+    return render(request, 'project_form.html', context)
+
 from django.views import generic
 
 
@@ -33,13 +47,12 @@ class ProjectDetailView(generic.DetailView):
 
 class ProjectCreateView(generic.CreateView):
     model = Project
-
     fields = ['title', 'reb_num', 'participant_expected_num', 'expected_start_date']
-    form = ProjectForm()
+    template_name = 'project_form.html'
 
-    def form_valid(self, form):
-        form.instance.creator = self.request.user
-        return super(ProjectCreateView, self).form_valid(form)
+    # def form_valid(self, form):
+    #     form.instance.creator = self.request.user
+    #     return super(ProjectCreateView, self).form_valid(form)
 
 class ProjectUpdateView(generic.UpdateView):
     model = Project

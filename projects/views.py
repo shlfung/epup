@@ -1,8 +1,9 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import ProjectForm
+from .models import Project
 
 # Create your views here.
 from django.http import HttpResponse
@@ -29,35 +30,39 @@ def create(request):
 
     form = ProjectForm(request.POST or None)
 
-    if request.method == "POST":
-        if form.is_valid():
-            form.save()
-            return redirect ('index')
-    context = {
-        "form":form
-    }
+    # if request.method == "POST":
+    #     if form.is_valid():
+    #         form.instance.creator = request.user
+    #         form.save()
+            #return HttpResponseRedirect("/") 
+    if form.is_valid():
+        form.instance.creator = request.user
+        form.save()
+        return HttpResponseRedirect("/projects/projects")
+    context = {"form":form}
 
     return render(request, 'project_form.html', context)
 
 from django.views import generic
 
 
+def update(request, id):
+
+    context = {}
+    obj = get_object_or_404(Project, id = id)
+    form = ProjectForm(request.POST or None, instance = obj)
+
+    if form.is_valid():
+        #form.instance.creator = request.user
+        form.save()
+        return HttpResponseRedirect("/projects")
+    context["form"] = form
+
+    return render(request, 'project_update_form.html', context)
+
+
 class ProjectDetailView(generic.DetailView):
     model = Project
-
-class ProjectCreateView(generic.CreateView):
-    model = Project
-    fields = ['title', 'reb_num', 'participant_expected_num', 'expected_start_date']
-    template_name = 'project_form.html'
-
-    # def form_valid(self, form):
-    #     form.instance.creator = self.request.user
-    #     return super(ProjectCreateView, self).form_valid(form)
-
-class ProjectUpdateView(generic.UpdateView):
-    model = Project
-
-    fields = ['title', 'reb_num', 'participant_expected_num', 'expected_start_date']
 
 class ProjectListView(LoginRequiredMixin, generic.ListView):
     model = Project

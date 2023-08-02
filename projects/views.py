@@ -2,6 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from .forms import ProjectForm
 from .models import Project
 
@@ -26,6 +27,7 @@ def index(request):
 
     return render(request, 'index.html', context=context)
 
+@login_required
 def create(request):
 
     form = ProjectForm(request.POST or None)
@@ -45,7 +47,7 @@ def create(request):
 
 from django.views import generic
 
-
+@login_required
 def update(request, id):
 
     context = {}

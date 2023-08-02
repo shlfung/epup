@@ -3,6 +3,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect, HttpResponseRedirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 from .forms import ProjectForm
 from .models import Project
 
@@ -57,7 +58,7 @@ def update(request, id):
     if form.is_valid():
         #form.instance.creator = request.user
         form.save()
-        return HttpResponseRedirect("/projects/projects")
+        return HttpResponseRedirect(reverse('project-detail', kwargs={'pk': id}))
     context["form"] = form
 
     return render(request, 'project_update_form.html', context)

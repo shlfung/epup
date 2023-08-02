@@ -66,9 +66,11 @@ def update(request, id):
 
 class ProjectDetailView(generic.DetailView):
     model = Project
+    template_name = 'project_detail.html'
 
 class ProjectListView(LoginRequiredMixin, generic.ListView):
     model = Project
+    template_name = 'project_list.html'
     paginate_by = 10
 
     def get_queryset(self):

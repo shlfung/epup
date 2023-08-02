@@ -4,8 +4,8 @@
 
 
   <h3>Title: {{ project.title }}</h3>
-  modify: <a href="/projects/projects/update/{{project.id}}">{{ project.title }}</a>
-
+  {% comment %} modify: <a href="/projects/projects/update/{{project.id}}">{{ project.title }}</a> {% endcomment %}
+  modify: <a href="{% url 'project-update' id=project.id  %}">{{ project.title }}</a>
 
   <!-- author detail link not yet defined -->
   <p><strong>REB:</strong> {{ project.reb_num }}</p>

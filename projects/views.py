@@ -57,7 +57,7 @@ def update(request, id):
     if form.is_valid():
         #form.instance.creator = request.user
         form.save()
-        return HttpResponseRedirect("/projects")
+        return HttpResponseRedirect("/projects/projects")
     context["form"] = form
 
     return render(request, 'project_update_form.html', context)

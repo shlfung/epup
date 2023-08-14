@@ -9,7 +9,15 @@
   <p>
     <form action="." method="post">
       {% csrf_token %}
-      {{ form|crispy }}
+      <div class="row">
+        <div class="col">
+      {{ form.title }}
+      </div>
+      <div class="col">
+        <label for="ProjectREBNumber" class="form-label">REB Number</label>
+        {{ form.reb_num }}
+      </div>
+      </div>
       <input type="submit" value="Submit" />
     </form>
 

@@ -12,30 +12,34 @@ from crispy_forms.layout import Layout, Field, Row
 
 class ProjectForm(forms.ModelForm):
 
+    title = forms.CharField(widget=forms.TextInput(attrs={'aria-label': 'Project Title', 'placeholder' : "Project Title" }))
+
     expected_start_date = forms.DateField(widget=forms.TextInput(attrs={'type': 'date'}),required=False)
-    
-    def __init__(self, *args, **kwargs):
-        super(ProjectForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper(self)
-        self.helper.form_class = 'blue'
-        self.helper.label_class = 'red'
-        self.helper.css_class = 'yellow'
-
-        self.helper.layout = Layout(
-            Row(
-                Field('title', wrapper_class='green-text'),
-                Field('reb_num', css_class='bg-santared mw-100'),
-                Field('participant_expected_num'),
-                Field('expected_start_date'),
-
-                css_class='form-row',
-            )
-        )
 
     class Meta:
         model = Project
         fields = ['title', 'reb_num', 'participant_expected_num', 'expected_start_date']
         exclude = ['creator']
+    
+    # def __init__(self, *args, **kwargs):
+    #     super(ProjectForm, self).__init__(*args, **kwargs)
+    #     self.helper = FormHelper(self)
+    #     self.helper.form_class = 'blue'
+    #     self.helper.label_class = 'red'
+    #     self.helper.css_class = 'yellow'
+
+    #     self.helper.layout = Layout(
+    #         Row(
+    #             Field('title', wrapper_class='green-text'),
+    #             Field('reb_num', css_class='bg-santared mw-100'),
+    #             Field('participant_expected_num'),
+    #             Field('expected_start_date'),
+
+    #             css_class='form-row',
+    #         )
+    #     )
+
+
 
 
 
